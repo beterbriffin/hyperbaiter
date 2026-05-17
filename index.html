@@ -13,13 +13,13 @@
 <body>
   <div id = "side-menu">
     <button class = "side-btn" onclick="switchMainTab('main-stats')">Stats</button>
-    <button class = "side-btn" onclick="switchMainTab('main-research')">Research</button>
+    <button id = "ToResearch" class = "side-btn" onclick="switchMainTab('main-research')">Research</button>
   </div>
 
   <div id = "main-stats" class = "main-tab active">
     <div class = "top-nav">
       <button onclick="switchSubTab('stats-screen')">Stats</button>
-      <button onclick="switchSubTab('upgrades-screen')">Upgrades</button>
+      <button id ="toUpgrade" onclick="switchSubTab('upgrades-screen')">Upgrades</button>
     </div>
 
     <div id="stats-screen" class="sub-tab active">
@@ -35,8 +35,7 @@
           Gain: <span id="rebirth_gain">0</span> R</button>
         <h1 id = "rebirth_amount">Rebirth: 1</h1>
       </div>
-
-      <div class = "superRebirth-bar">
+      <div id = "SR" class = "superRebirth-bar">
         <button id = "btn-superRebirth" onclick="buySuperRebirth()">Reset: R , M , $<br>
           Gain: <span id="superRebirth_gain">0</span> SR</button>
         <h1 id = "superRebirth_amount">Super Rebirth: 1</h1>
@@ -59,24 +58,71 @@
     </div>
       <div id="upgrades-screen" class="sub-tab">
         <div class = "firstRowUpgrades" >
-          <button id = "btn-Up-1" onclick = "Upgrade1()">$ x1.1<br>
-          (x<span id = "up1_boost" ></span>)<br>
-          Cost: <span id = "up1_cost"></span>$<br>
-          <span id = "up1_count"></span>/10</button>
+          <div id="btn-Up-1" onclick="Upgrade1()">
+            <div class="upgrade-info">
+              $ x1.1<br>
+              (x<span id = "up1_boost"></span>)<br>
+              Cost: <span id="up1_cost"></span> $<br>
+              <span id="up1_count"></span>/<span id = "up1_cap"></span>
+            </div>
+            <button id ="btn-Up-1-Max" onclick="Upgrade1Max(event)">Max</button>
+          </div>
           <button id = "btn-Up-2" onclick = "Upgrade2()">$ boost M<br>
             (x<span id = "up2_boost"></span>)<br>
-            Cost: 100k$<br>
+            Cost: 250k $<br>
             <span id = "up2_count"></span>/1</button>
-          <button id = "btn-Up-3" onclick = "Upgrade3()">M x1.15<br>
-            (x<span id = "up3_boost" ></span>)<br>
-            Cost: <span id = "up3_cost"></span>M<br>
-            <span id = "up3_count"></span>/10</button>
+          <div id="btn-Up-3" onclick="Upgrade3()">
+            <div class="upgrade-info">
+              M x1.15<br>
+              (x<span id = "up3_boost"></span>)<br>
+              Cost: <span id="up3_cost"></span> M<br>
+              <span id="up3_count"></span>/<span id = "up3_cap"></span>
+            </div>
+            <button id ="btn-Up-3-Max" onclick="Upgrade3Max(event)">Max</button>
+          </div>
         </div>
-        <div class = "firstRowUpgrades" >
+        <div class = "secondRowUpgrades" >
           <button id = "btn-Up-4" onclick = "Upgrade4()">PlayTime boost R<br>
             (x<span id = "up4_boost"></span>)<br>
-            Cost: 1kM<br>
+            Cost: 4k M<br>
             <span id = "up4_count"></span>/1</button>
+          <button id = "btn-Up-5" onclick = "Upgrade5()">R boost R<br>
+            (x<span id = "up5_boost"></span>)<br>
+            Cost: 20 R<br>
+            <span id = "up5_count"></span>/1</button>
+          <div id="btn-Up-6" onclick="Upgrade6()">
+            <div class="upgrade-info">
+              SR x1.05<br>
+              (x<span id = "up6_boost"></span>)<br>
+              Cost: <span id="up6_cost"></span> R<br>
+              <span id="up6_count"></span>/<span id = "up6_cap"></span>
+            </div>
+            <button id ="btn-Up-6-Max" onclick="Upgrade6Max(event)">Max</button>
+          </div>
+        </div>
+        <div class = "lastRowUpgrades">
+          <div id="btn-Up-7" onclick="Upgrade7()">
+            <div class="upgrade-info">
+              All stats x1.2<br>
+              (x<span id = "up7_boost"></span>)<br>
+              Cost: <span id="up7_cost"></span> SR<br>
+              <span id="up7_count"></span>/5
+            </div>
+            <button id ="btn-Up-7-Max" onclick="Upgrade7Max(event)">Max</button>
+          </div>
+          <button id = "btn-Up-8" onclick = "Upgrade8()">Up. count boost SR<br>
+            (x<span id = "up8_boost"></span>)<br>
+            Cost: 18 SR<br>
+            <span id = "up8_count"></span>/1</button>
+          <button id = "btn-Up-9" onclick = "Upgrade9()">Unlock Research<br>
+            Cost: 100 SR<br>
+            <span id = "up9_count"></span>/1</button>
+        </div>
+        <div class = "stats-upg">
+          <h1 id = "money-upg">Money: 0</h1>
+          <h1 id = "multiplier-upg">Multiplier: 0</h1>
+          <h1 id = "rebirth-upg">Rebirth: 0</h1>
+          <h1 id = "superRebirth-upg">SuperRebirth: 0</h1>
         </div>
       </div>
   </div>
@@ -88,13 +134,200 @@
     </div>
 
     <div id="research-scientists" class="sub-tab">
-      <h2>Research1</h2>
+      <div class="firstRowReserchers">
+        <div id="btn-research-money" onclick="BuyResearchersMoney()">
+          <div class="upgrade-info">
+            Buy<br>
+            1 Researcher<br>
+            Cost: <span id="research-money-cost"></span> $<br>
+          </div>
+          <button id ="research-money-max" onclick="BuyResearchersMoneyMax(event)">Max</button>
+        </div>
+        <div id="btn-research-multiplier" onclick="BuyResearchersMultiplier()">
+          <div class="upgrade-info">
+            Buy<br>
+            1 Researcher<br>
+            Cost: <span id="research-multiplier-cost"></span> M<br>
+          </div>
+          <button id ="research-multiplier-max" onclick="BuyResearchersMultiplierMax(event)">Max</button>
+        </div>
+        <div id="btn-research-rebirth" onclick="BuyResearchersRebirth()">
+          <div class="upgrade-info">
+            Buy<br>
+            1 Researcher<br>
+            Cost: <span id="research-rebirth-cost"></span> R<br>
+          </div>
+          <button id ="research-rebirth-max" onclick="BuyResearchersRebirthMax(event)">Max</button>
+        </div>
+        <div id="btn-research-superRebirth" onclick="BuyResearchersSuperRebirth()">
+          <div class="upgrade-info">
+            Buy<br>
+            1 Researcher<br>
+            Cost: <span id="research-superRebirth-cost"></span> SR<br>
+          </div>
+          <button id ="btn-research-superRebirth-max" onclick="BuyResearchersSuperRebirthMax(event)">Max</button>
+        </div>
+      </div>
+      <div class = "secondRowReserchers">
+        <div id="btn-research-speed-money" onclick="BuyResearchSpeedMoney()">
+          <div class="upgrade-info">
+            Buy + x0.01<br>
+            Research speed<br>
+            Cost: <span id="research-speed-money-cost"></span> $<br>
+          </div>
+          <button id ="research-speed-money-max" onclick="BuyResearchSpeedMoneyMax(event)">Max</button>
+        </div>
+        <div id="btn-research-speed-multiplier" onclick="BuyResearchSpeedMultiplier()">
+          <div class="upgrade-info">
+            Buy + x0.01<br>
+            Research speed<br>
+            Cost: <span id="research-speed-multiplier-cost"></span> M<br>
+          </div>
+          <button id ="research-speed-multiplier-max" onclick="BuyResearchSpeedMultiplierMax(event)">Max</button>
+        </div>
+        <div id="btn-research-speed-rebirth" onclick="BuyResearchSpeedRebirth()">
+          <div class="upgrade-info">
+            Buy + x0.01<br>
+            Research speed<br>
+            Cost: <span id="research-speed-rebirth-cost"></span> R<br>
+          </div>
+          <button id ="research-speed-rebirth-max" onclick="BuyResearchSpeedRebirthMax(event)">Max</button>
+        </div>
+        <div id="btn-research-speed-superRebirth" onclick="BuyResearchSpeedSuperRebirth()">
+          <div class="upgrade-info">
+            Buy + x0.01<br>
+            Research speed<br>
+            Cost: <span id="research-speed-superRebirth-cost"></span> SR<br>
+          </div>
+          <button id ="research-speed-superRebirth-max" onclick="BuyResearchSpeedSuperRebirthMax(event)">Max</button>
+        </div>
+      </div>
+      <h1 id = "researchers-amount">You Have 67 Researchers</h1>
+      <h1 id = "research-speed">Research speed:</h1>
+      <h1 id = "speed-bar"><span id = "money-speed">12</span> x <span id = "multiplier-speed">12</span> x <span id = "rebirth-speed">12</span> x <span id = "superRebirth-speed">12</span> x <span id = "upgrades-speed">12</span> = <span id = "suma-speed">12</span></h1>
+      <div class = "stats-researchers">
+        <h1 id = "money-re">Money: 0</h1>
+        <h1 id = "multiplier-re">Multiplier: 0</h1>
+        <h1 id = "rebirth-re">Rebirth: 0</h1>
+        <h1 id = "superRebirth-re">SuperRebirth: 0</h1>
+      </div>
     </div>
-
     <div id="research-tech" class="sub-tab">
-      <h2>Research2</h2>
+      <div id = "spending-bar">
+        <button id = "research-amount-bar">You have:<br>
+        <span id = "researchers-teraz"></span>/<span id = "researchers-suma"></span>RE</button>
+        <button id = "research-speed-bar">Research speed:<br>
+        <span id = "research-speed-okno"></span></button>
+        <button id = "recall-bar" onclick="Recall()">Recall<br>
+        all RE</button>
+        <button id = "research-spending-bar">RE spending:<br>
+        <span id = "researchers-spending"></span></button>
+        <div id="spending-grid">
+          <button onclick="reserchers_add1()">+1</button>
+          <button onclick="reserchers_min1()">-1</button>
+          <button onclick="reserchers_pro10()">%10</button>
+          <button onclick="reserchers_add10()">+10</button>
+          <button onclick="reserchers_min10()">-10</button>
+          <button onclick="reserchers_pro25()">%25</button>
+          <button onclick="reserchers_add100()">+100</button>
+          <button onclick="reserchers_min100()">-100</button>
+          <button onclick="reserchers_pro100()">%100</button>
+        </div>
+        <button id = "reset-spending" onclick="reserchers_reset()">RESET</button>
+      </div>
+      <div class = "first-row-re">
+        <button id = "research-upgrade-1" onclick="upgrade1Research()">Lv <span id = "up1-lv"></span><br>
+          All previous stats x1.1<br>
+          (x<span id = "up1-boost"></span>)<br>
+          RE <span id = "up1-researchers"></span><br>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="up1-progress"></div>
+            <span class="progress-text">
+        <span id="up1-time-is"></span>s/<span id="up1-time-left"></span>s
+            </span>
+          </div>
+        </button>
+        <button id = "research-upgrade-2" onclick="upgrade2Research()">Lv <span id = "up2-lv"></span><br>
+          Up1, Up3, Up6 cap +1<br>
+          (+<span id = "up2-boost"></span>)<br>
+          RE <span id = "up2-researchers"></span><br>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="up2-progress"></div>
+            <span class="progress-text">
+        <span id="up2-time-is"></span>s/<span id="up2-time-left"></span>s
+            </span>
+          </div>
+        </button>
+        <button id = "research-upgrade-3" onclick="upgrade3Research()">Lv <span id = "up3-lv"></span><br>
+          SR gain x1.2<br>
+          (x<span id = "up3-boost"></span>)<br>
+          RE <span id = "up3-researchers"></span><br>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="up3-progress"></div>
+            <span class="progress-text">
+        <span id="up3-time-is"></span>s/<span id="up3-time-left"></span>s
+            </span>
+          </div>
+        </button>
+        <button id = "research-upgrade-4" onclick="upgrade4Research()">Lv <span id = "up4-lv"></span><br>
+          SR boost R<br>
+          (x<span id = "up4-boost"></span>)<br>
+          RE <span id = "up4-researchers"></span><br>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="up4-progress"></div>
+            <span class="progress-text">
+        <span id="up4-time-is"></span>s/<span id="up4-time-left"></span>s
+              </span>
+          </div>
+        </button>
+      </div>
+      <div class = "second-row-re">
+        <button id = "research-upgrade-5" onclick="upgrade5Research()">Lv <span id = "up5-lv"></span><br>
+          Faster research tick speed<br>
+          (-<span id = "up5-boost"></span>ms)<br>
+          RE <span id = "up5-researchers"></span><br>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="up5-progress"></div>
+            <span class="progress-text">
+        <span id="up5-time-is"></span>s/<span id="up5-time-left"></span>s
+            </span>
+          </div>
+        </button>
+        <button id = "research-upgrade-6" onclick="upgrade6Research()">Lv <span id = "up6-lv"></span><br>
+          Increase research speed x1.2<br>
+          (x<span id = "up6-boost"></span>)<br>
+          RE <span id = "up6-researchers"></span><br>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="up6-progress"></div>
+            <span class="progress-text">
+        <span id="up6-time-is"></span>s/<span id="up6-time-left"></span>s
+            </span>
+          </div>
+        </button>
+        <button id = "research-upgrade-7" onclick="upgrade7Research()">Lv <span id = "up7-lv"></span><br>
+         Increase RE by 1<br>
+          (+<span id = "up7-boost"></span>)<br>
+          RE <span id = "up7-researchers"></span><br>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="up7-progress"></div>
+            <span class="progress-text">
+        <span id="up7-time-is"></span>s/<span id="up7-time-left"></span>s
+            </span>
+          </div>
+        </button>
+        <button id = "research-upgrade-8" onclick="upgrade8Research()">Lv <span id = "up8-lv"></span><br>
+          $ boost research speed<br>
+          (x<span id = "up8-boost"></span>)<br>
+          RE <span id = "up8-researchers"></span><br>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="up8-progress"></div>
+            <span class="progress-text">
+        <span id="up8-time-is"></span>s/<span id="up8-time-left"></span>s
+              </span>
+          </div>
+        </button>
+      </div>
     </div>
-
     <div id="research-auto" class="sub-tab">
       <h2>Research3</h2>
     </div>
