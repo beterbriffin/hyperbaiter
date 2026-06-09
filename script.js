@@ -626,9 +626,39 @@ function loadGame() {
         console.log("Gra wczytana!");
     }
 }
+function exportSave() {
+    let saveString = localStorage.getItem("mojaGraSave");
+    if (!saveString) {
+        alert("There is no save to export!");
+        return;
+    }
+    let encoded = btoa(saveString);
+    document.getElementById("import-input").value = encoded;
+    navigator.clipboard.writeText(encoded).then(() => {
+        let alertElement = document.getElementById("export-alert");
+        alertElement.className = "export-alert-visible";
+        setTimeout(() => {
+            alertElement.className = "export-alert-hidden";
+        }, 3000);
+    }).catch(err => {
+        console.error("Failed to copy: ", err);
+    });
+}
+function importSave() {
+    let encoded = document.getElementById("import-input").value;
+    try {
+        let saveString = atob(encoded); // Base64 → JSON
+        JSON.parse(saveString); // sprawdź czy to poprawny JSON
+        localStorage.setItem("mojaGraSave", saveString);
+        location.reload();
+    } catch(e) {
+        alert("Wrong saving file!");
+    }
+}
 //=====(HARD RESET)=====
 function resetGame() {
     localStorage.removeItem("mojaGraSave");
+    localStorage.removeItem("gameTheme");
     location.reload();
 }
 //=====(FUNKCJA DO FORMATOWANIA)=====
@@ -668,6 +698,26 @@ function switchSubTab(id) {
 }
 function round(liczba) {
     return Math.round(liczba * 100) / 100;
+}
+//=====(BACKGROUND)======
+function changeTheme(themeName) {
+    document.body.classList.remove('theme-white', 'theme-gray', 'theme-black');
+    if (themeName === 'white') {
+        document.body.classList.add('theme-white');
+    } else if (themeName === 'gray') {
+        document.body.classList.add('theme-gray');
+    } else if (themeName === 'black') {
+        document.body.classList.add('theme-black');
+    }
+    localStorage.setItem("gameTheme", themeName);
+}
+function loadTheme() {
+    let savedTheme = localStorage.getItem("gameTheme");
+    if (savedTheme) {
+        changeTheme(savedTheme);
+    } else {
+        changeTheme('gray');
+    }
 }
 //=====(PRZYCISKI)=====
 function buyMultiplier() {
@@ -1906,6 +1956,7 @@ setInterval(() => {
 //=====(WCZYTYWANIE GRY)=====
 window.onload = function() {
     loadGame();
+    loadTheme();
     upgrade1Active();
     upgrade2Active();
     upgrade3Active();

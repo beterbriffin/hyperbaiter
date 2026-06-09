@@ -14,6 +14,7 @@
   <div id = "side-menu">
     <button class = "side-btn" onclick="switchMainTab('main-stats')">Stats</button>
     <button id = "ToResearch" class = "side-btn" onclick="switchMainTab('main-research')">Research</button>
+    <button class = "side-btn" onclick="switchMainTab('main-settings')">Settings</button>
   </div>
 
   <div id = "main-stats" class = "main-tab active">
@@ -45,21 +46,21 @@
           Gain: <span id="mega_gain">0</span> Me</button>
         <h1 id = "mega_amount">Mega: 1</h1>
       </div>
-      <div class = "firstRow">
-        <button id = "btn-X-ADMIN">x<span id = "AdminX"></span></button>
+      <div class = "hidden">
+        <div class = "firstRow">
+          <button id = "btn-X-ADMIN">x<span id = "AdminX"></span></button>
+        </div>
+        <div class = "secondRow">
+          <button id = "btn-Reset-ADMIN" onclick="AdminXReset()">RE.</button>
+          <button id = "btn-*10-ADMIN" onclick="AdminX10()" >10</button>
+          <button id = "btn-*100-ADMIN" onclick="AdminX100()" >100</button>
+        </div>
+        <div class = "lastRow">
+          <button id = "btn-M-ADMIN" onclick = "AdminM()" >M</button>
+          <button id = "btn-R-ADMIN" onclick = "AdminR()" >R</button>
+          <button id = "btn-RS-ADMIN" onclick = "AdminRS()" >RS</button>
+        </div>
       </div>
-      <div class = "secondRow">
-        <button id = "btn-Reset-ADMIN" onclick="AdminXReset()">RE.</button>
-        <button id = "btn-*10-ADMIN" onclick="AdminX10()" >10</button>
-        <button id = "btn-*100-ADMIN" onclick="AdminX100()" >100</button>
-      </div>
-      <div class = "lastRow">
-        <button id = "btn-hardReset" onclick = "resetGame()">RESET</button>
-        <button id = "btn-M-ADMIN" onclick = "AdminM()" >M</button>
-        <button id = "btn-R-ADMIN" onclick = "AdminR()" >R</button>
-        <button id = "btn-RS-ADMIN" onclick = "AdminRS()" >RS</button>
-      </div>
-
     </div>
       <div id="upgrades-screen" class="sub-tab">
         <div class = "firstRowUpgrades" >
@@ -483,7 +484,30 @@
       </div>
     </div>
   </div>
+  <div id = "main-settings" class="main-tab">
+    <div class="top-nav">
+      <button id = "one" onclick="switchSubTab('settings-settings')">Settings</button>
+      <button id = "two" onclick="switchSubTab('settings-stats')">Stats</button>
+    </div>
+    <div id="settings-settings" class="sub-tab">
+      <button id = "btn-save" class="settings" onclick = "saveGame()">Save</button>
+      <div class="settings-container">
+        <button id = "three" class="settings" onclick="exportSave()">Export</button>
+        <button id = "four" class="settings" onclick="importSave()">Import</button>
+      </div>
+      <textarea id="import-input" placeholder="paste import string here"></textarea>
+      <span id="export-alert" class="export-alert-hidden">Save copied to clipboard!</span>
+      <button  class="settings" onclick = "resetGame()">RESET</button>
+      <div class="theme-selection">
+        <h3 id = "tekst">Theme:</h3>
+        <button id = "a" class="theme-btn btn-white" onclick="changeTheme('white')">White</button>
+        <button id = "b" class="theme-btn btn-gray" onclick="changeTheme('gray')">Gray</button>
+        <button id = "c" class="theme-btn btn-black" onclick="changeTheme('black')">Black</button>
+      </div>
+    </div>
+    <div id="settings-stats" class="sub-tab">
+      <h3>Statistics:</h3>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
-
-

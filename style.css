@@ -7,6 +7,33 @@ body {
     -webkit-user-select: none;
 
 }
+body.theme-white {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+body.theme-gray {
+    background-color: rgb(38 38 38); !important;
+    color: #ffffff !important;
+}
+
+body.theme-black {
+    background-color: rgb(15, 15, 15) !important;
+    color: #ffffff !important;
+}
+.theme-selection {
+    margin-top: 15px;
+}
+.theme-btn {
+    padding: 8px 15px;
+    margin-right: 5px;
+    border: 2px solid #343434;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-white { background-color: #ffffff; color: #000000; }
+.btn-gray  { background-color: rgb(80, 80, 80); color: #ffffff; }
+.btn-black { background-color: rgb(15, 15, 15); color: #ffffff; }
 /*=====(MENU)=====*/
 .main-tab { display: none; }
 .sub-tab { display: none; }
@@ -53,7 +80,6 @@ body {
 }
 /*==========*/
 .top-nav button {
-
     padding: 0px 0px;
     background-color: #606060;
     color: #000000;
@@ -290,27 +316,6 @@ body {
     background-color: #d5802e;
 }
 /*==========*/
-#btn-hardReset {
-    background-color: #606060;
-    color: #000000;
-    border: 4px solid #343434;
-    width: 160px;
-    height: 60px;
-    font-size: 22px;
-    margin-top: 30px;
-    margin-left: 20px;
-    transition: 0.25s;
-    border-radius: 18px;
-}
-#btn-hardReset:hover {
-    background-color: #807f7f;
-    transform: scale(1.05);
-}
-#btn-hardReset:active {
-    transform: scale(0.95);
-    background-color: #606060;
-}
-/*==========*/
 #btn-M-ADMIN {
     background-color: #ff2a2a;
     color: #000000;
@@ -319,7 +324,7 @@ body {
     height: 90px;
     font-size: 35px;
     margin-top: 20px;
-    margin-left: 500px;
+    margin-left: 680px;
     transition: 0.25s;
     border-radius: 5px;
     font-weight: bold;
@@ -1701,6 +1706,103 @@ body {
     transform: scale(0.95);
     background-color: #606060;
 }
+
+.export-alert-hidden {
+    display: inline-block;
+    margin-left: 10px;
+    color: #00ffcc;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.export-alert-visible {
+    display: inline-block;
+    margin-left: 10px;
+    color: #00ffcc;
+    font-weight: bold;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+.settings{
+    background-color: #606060;
+    color: #000000;
+    border: 4px solid #343434;
+    width: 140px;
+    height: 60px;
+    font-size: 30px;
+    transition: 0.25s;
+    border-radius: 5px;
+}
+.settings:hover {
+    background-color: #807f7f;
+    transform: scale(1.05);
+}
+.settings:active {
+    transform: scale(0.95);
+    background-color: #606060;
+}
+#settings-settings .settings,
+#settings-settings #import-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+#import-input {
+    resize: none;
+    overflow: hidden;
+    height: 60px;
+    padding: 8px;
+    font-family: monospace;
+    font-size: 38px;
+}
+#main-settings {
+    margin: 0;
+    padding: 20px;
+    clear: both;
+}
+
+#settings-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 240px;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+#one{
+    margin-top: 0px;
+    margin-left: -20px;
+}
+#two{
+    margin-top: 0px;
+}
+#three {
+    height: 60px;
+}
+#four{
+    margin-left: 28px;
+    height: 60px;
+}
+#tekst{
+    margin-top: -20px;
+    color: #676767;
+    font-weight: bold;
+    font-size: 50px;
+}
+#a{
+    margin-top: -50px;
+    font-size: 14px;
+}
+#b{
+    margin-top: -20px;
+    font-size: 14px;
+}
+#c{
+    margin-top: -50px;
+    font-size: 14px;
+}
 /*=====(ŁĄCZENIE NAPIS + PRZYCISK)=====*/
 .multiplier-bar {
     display: flex;
@@ -1865,7 +1967,17 @@ body {
     margin-top: -715px;
     margin-left: -140px;
 }
+.settings-container{
+    display: flex;
+    align-items: center;
+}
 .hidden {
     visibility: hidden !important;
     pointer-events: none;
+}
+.main-tab { display: none !important; }
+.sub-tab { display: none !important; }
+.active { display: block !important; }
+#settings-settings.active {
+    display: flex !important;
 }
