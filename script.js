@@ -8,9 +8,9 @@ let mega = 0;
 let adminX = 1;
 //=====(UBGRADE 1)=====
 let up1Count = 0;
-let up1Cost = 10000;
+let up1Cost = 1000;
 let up1Boost = 1;
-let up1Cap = 10;
+let up1Cap = 20;
 //=====(UBGRADE 2)=====
 let up2Count = 0;
 let up2Cost = 250000;
@@ -764,8 +764,8 @@ function buyMega() {
 function Upgrade1() {
      if(money >= up1Cost && up1Count < up1Cap) {
          money -= up1Cost;
-         up1Cost *= 1.4;
-         up1Boost *= 1.10;
+         up1Cost *= 1.31;
+         up1Boost *= 1.24;
          up1Count++;
          updateUI();
      }
@@ -791,8 +791,8 @@ function Upgrade2() {
 function Upgrade3() {
     if(multiplier >= up3Cost && up3Count < up3Cap) {
         multiplier -= up3Cost;
-        up3Cost *= 1.4;
-        up3Boost *= 1.15;
+        up3Cost *= 1.33;
+        up3Boost *= 1.65;
         up3Count++;
         updateUI();
     }
@@ -843,8 +843,8 @@ function Upgrade6Max() {
 function Upgrade7() {
     if(superRebirth >= up7Cost && up7Count < 5) {
         superRebirth -= up7Cost;
-        up7Cost *= 1.6;
-        up7Boost *= 1.2;
+        up7Cost *= 1.67;
+        up7Boost *= 1.8;
         up7Count++;
         updateUI();
     }
@@ -852,8 +852,8 @@ function Upgrade7() {
 function Upgrade7Max() {
     while (superRebirth >= up7Cost && up7Count < 5) {
         superRebirth -= up7Cost;
-        up7Cost *= 1.6;
-        up7Boost *= 1.2;
+        up7Cost *= 1.67;
+        up7Boost *= 1.8;
         up7Count++;
         updateUI();
     }
@@ -977,7 +977,7 @@ function BuyResearchSpeedRebirth() {
     if(rebirth >= researchSpeedRebirthCost){
         rebirth -= researchSpeedRebirthCost;
         researchSpeedRebirthCost *= 2;
-        researchSpeedRebirthMulti += 0.01;
+        researchSpeedRebirthMulti *= 1.51;
     }
 }
 function BuyResearchSpeedRebirthMax(event) {
